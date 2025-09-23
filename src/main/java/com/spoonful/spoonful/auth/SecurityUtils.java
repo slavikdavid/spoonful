@@ -3,9 +3,14 @@ package com.spoonful.spoonful.auth;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public class SecurityUtils {
+public final class SecurityUtils {
+    private SecurityUtils() {}
+
     public static Long currentUserId() {
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
-        return (a != null && a.getPrincipal() instanceof Long id) ? id : null;
+        if (a == null || !a.isAuthenticated()) return null;
+        Object p = a.getPrincipal();
+        if (p instanceof Long l) return l;
+        return null;
     }
 }

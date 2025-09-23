@@ -13,4 +13,6 @@ public class User {
     @Column(name="password_hash", nullable=false) private String passwordHash;
     @Column(nullable=false) private String displayName;
     @Column(nullable=false) private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(nullable = false)
+    private boolean emailVerified = false;
 }
