@@ -12,4 +12,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     order by r.createdAt desc
   """)
     Page<Recipe> search(@Param("q") String q, Pageable pageable);
+
+    Page<Recipe> findByAuthorId(Long authorId, Pageable pageable);
 }

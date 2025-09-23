@@ -42,7 +42,12 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
+
     private Set<User> likedBy = new HashSet<>();
     public Set<User> getLikedBy() { return likedBy; }
     public List<Comment> getComments() { return comments; }
+
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("sortOrder asc, id asc")
+    private java.util.List<RecipePhoto> photos = new java.util.ArrayList<>();
 }
